@@ -6,43 +6,31 @@
 package Server;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.Socket;
 
 /**
  *
  * @author botrous.yessa
  */
 public class Server {
-      private int port;
-    private ServerSocket SS;
-
-    public Server(int port) {
-        this.port = port;
-        if(!startServer())
-            System.out.println("errore in fase di creazione");
-    }
-
-    private boolean startServer() {
-        try {
-            SS = new ServerSocket(port);
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        System.out.println("Server creato con successo");
-        return true;
-    }
-
-
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Server server = new Server(6666);
-        server.runServer();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ServerSocket ss;
+        ss = new ServerSocket(7120);
+        Socket s = ss.accept();
+        ObjectInputStream in = new ObjectInputStream(s.getInputStream());
+        char[] caratteri = (char[]) in.readObject();
+        in.close();
+        for (int i = 0; i < caratteri.length; i++) {
+            System.out.println("Ecco i tuoi caratteri");
+            System.out.print(caratteri[i] + " ");
+        }
+
     }
 
 }

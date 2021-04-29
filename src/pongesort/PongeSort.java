@@ -5,10 +5,8 @@
  */
 package pongesort;
 
-
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.ServerSocket;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
@@ -20,12 +18,13 @@ public class PongeSort {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        ServerSocket server=new ServerSocket();
-        Socket s=new Socket();
-        ObjectInputStream in=new ObjectInputStream(s.getInputStream());
-        char[]caratteri={'c','x','g','h','j','k','l','a','s'};
-        Thread.sleep(2000);
+    public static void main(String[] args) throws IOException {
+        char[] caratteri = {'h', 'k', 'l', 's', 'e', 'y', 'u', 'i', 'z', 'o'};
+        Socket s = new Socket("localhost", 7120);
+        ObjectOutputStream out;
+        out = new ObjectOutputStream(s.getOutputStream());
+        out.writeObject(caratteri);
+        out.close();
     }
-    
+
 }
