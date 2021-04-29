@@ -26,8 +26,11 @@ public class Server {
         ObjectInputStream in = new ObjectInputStream(s.getInputStream());
         char[] caratteri = (char[]) in.readObject();
         in.close();
+        System.out.println("-----------------------------------------");
+        System.out.println("           Ecco i tuoi caratteri");
+        System.out.println("-----------------------------------------");
         for (int i = 0; i < caratteri.length; i++) {
-            System.out.println("Ecco i tuoi caratteri");
+           
             System.out.print(caratteri[i] + " ");
         }
 
